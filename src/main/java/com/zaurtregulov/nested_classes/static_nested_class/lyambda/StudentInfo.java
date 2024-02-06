@@ -71,6 +71,12 @@ class Test {
         info.testStudents(students, (Student p) -> {
             return p.avgGrade > 8;
         });
+        info.testStudents(students, p -> p.avgGrade > 8);
+
+        info.testStudents(students, p -> {
+            System.out.println("hello");
+            return p.avgGrade > 8;
+        });
 
         info.testStudents(students, (Student p) -> {
             return p.avgGrade > 20 && p.avgGrade < 9.3 && p.sex == 'f';
