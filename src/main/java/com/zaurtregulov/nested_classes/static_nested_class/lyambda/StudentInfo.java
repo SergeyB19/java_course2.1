@@ -1,6 +1,8 @@
 package com.zaurtregulov.nested_classes.static_nested_class.lyambda;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class StudentInfo {
@@ -41,6 +43,17 @@ public class StudentInfo {
 }
 
 class Test {
+
+    private static double avgOfSmth(List<Student> list, Function<Student, Double> function) {
+        double result = 0;
+        for (Student st : list) {
+            result += function.apply(st);
+        }
+        result = result / list.size();
+        return result;
+    }
+
+
     public static void main(String[] args) {
         Student st1 = new Student("Ivan", 'm', 22, 3, 8.3);
         Student st2 = new Student("Nikolay", 'm', 28, 2, 6.4);
@@ -56,8 +69,16 @@ class Test {
         students.add(st5);
 
         StudentInfo info = new StudentInfo();
+        Function<Student, Double> function = student -> student.avgGrade;
+        double res = avgOfSmth(students, stud -> stud.avgGrade);
+        System.out.println(res);
+        double res1 = avgOfSmth(students, stud -> (double) stud.course);
+        System.out.println(res1);
+        double res2 = avgOfSmth(students, stud -> (double) stud.age);
+        System.out.println(res2);
 
-        System.out.println("_________________________");
+
+
 /*        info.testStudents(students, new CheckOverGrade() {
 
             @Override
@@ -65,7 +86,7 @@ class Test {
                 return s.age < 30;
             }
         });*/
-        System.out.println("_________________________");
+ /*       System.out.println("_________________________");
         info.testStudents(students, (Student s) -> {
             return s.age < 30;
         });
@@ -79,19 +100,19 @@ class Test {
             System.out.println("hello");
             return p.avgGrade > 8;
         });
-
+*/
         Predicate<Student> p1 = student -> student.avgGrade > 7.5;
         Predicate<Student> p2 = student -> student.sex == 'm';
         System.out.println("***************");
-        info.testStudents(students,p1);
+        info.testStudents(students, p1);
         System.out.println("***************");
-        info.testStudents(students,p2);
+        info.testStudents(students, p2);
         System.out.println("*******and********");
-        info.testStudents(students,p1.and(p2));
+        info.testStudents(students, p1.and(p2));
         System.out.println("*******or********");
-        info.testStudents(students,p1.or(p2));
+        info.testStudents(students, p1.or(p2));
         System.out.println("*******negate********");
-        info.testStudents(students,p1.negate());
+        info.testStudents(students, p1.negate());
 
 
         info.testStudents(students, (Student p) -> {
