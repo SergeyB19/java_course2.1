@@ -1,4 +1,4 @@
-package com.zaurtregulov.nested_classes.static_nested_class;
+package com.zaurtregulov.nested_classes.static_nested_class.anonymos_class;
 
 public class Car {
     String color;
