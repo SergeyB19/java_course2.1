@@ -1,11 +1,13 @@
 package com.zaurtregulov.nested_classes.static_nested_class.lyambda;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class StudentInfo {
-    void testStudents(ArrayList<Student> al, StudentChecks studentChecks) {
+                                       /* StudentChecks studentChecks*/
+    void testStudents(ArrayList<Student> al, Predicate<Student> pr) {
         for (Student s : al) {
-            if (studentChecks.check(s)) {
+            if (pr.test(s)) {
                 System.out.println(s);
             }
         }
@@ -56,13 +58,13 @@ class Test {
         StudentInfo info = new StudentInfo();
 
         System.out.println("_________________________");
-        info.testStudents(students, new CheckOverGrade() {
+/*        info.testStudents(students, new CheckOverGrade() {
 
             @Override
             public boolean check(Student s) {
                 return s.age < 30;
             }
-        });
+        });*/
         System.out.println("_________________________");
         info.testStudents(students, (Student s) -> {
             return s.age < 30;
@@ -78,12 +80,26 @@ class Test {
             return p.avgGrade > 8;
         });
 
+        Predicate<Student> p1 = student -> student.avgGrade > 7.5;
+        Predicate<Student> p2 = student -> student.sex == 'm';
+        System.out.println("***************");
+        info.testStudents(students,p1);
+        System.out.println("***************");
+        info.testStudents(students,p2);
+        System.out.println("*******and********");
+        info.testStudents(students,p1.and(p2));
+        System.out.println("*******or********");
+        info.testStudents(students,p1.or(p2));
+        System.out.println("*******negate********");
+        info.testStudents(students,p1.negate());
+
+
         info.testStudents(students, (Student p) -> {
             return p.avgGrade > 20 && p.avgGrade < 9.3 && p.sex == 'f';
         });
 
 
-        info.testStudents(students, new CheckOverGrade());
+//        info.testStudents(students, new CheckOverGrade());
         System.out.println("_________________________");
 
         info.printStudentsOverGrade(students, 8);
@@ -94,14 +110,15 @@ class Test {
     }
 }
 
-interface StudentChecks {
+/*interface StudentChecks {
     boolean check(Student s);
-}
+}*/
 
+/*
 class CheckOverGrade implements StudentChecks {
 
     @Override
     public boolean check(Student s) {
         return s.avgGrade > 8;
     }
-}
+}*/
