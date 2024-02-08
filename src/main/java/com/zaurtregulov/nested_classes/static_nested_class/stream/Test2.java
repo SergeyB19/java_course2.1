@@ -3,6 +3,7 @@ package com.zaurtregulov.nested_classes.static_nested_class.stream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Test2 {
     public static void main(String[] args) {
@@ -19,6 +20,10 @@ public class Test2 {
         students.add(st5);
 
         students = students.stream().filter(element -> element.getAge() > 22 && element.getAvgGrade() < 7.2).collect(Collectors.toList());
+        System.out.println(students);
+
+        Stream<Student> studentStream = Stream.of(st1, st2, st3, st4, st5);
+        studentStream.filter(element -> element.getAge() > 22 && element.getAvgGrade() < 7.2).collect(Collectors.toList());
         System.out.println(students);
     }
 }
