@@ -10,6 +10,12 @@ public class Test7 {
         Student st3 = new Student("Elena", 'f', 19, 1, 8.9);
         Student st4 = new Student("Petr", 'm', 35, 4, 7);
         Student st5 = new Student("Mariya", 'f', 23, 3, 7.4);
+        List<Student> students = new ArrayList<>();
+        students.add(st1);
+        students.add(st2);
+        students.add(st3);
+        students.add(st4);
+        students.add(st5);
 
         Faculty f1 = new Faculty("Ecomomics");
         Faculty f2 = new Faculty("Appplied mathematics");
