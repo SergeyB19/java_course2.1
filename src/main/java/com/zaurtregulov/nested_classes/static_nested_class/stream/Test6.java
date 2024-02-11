@@ -20,10 +20,11 @@ public class Test6 {
         stream4.forEach(System.out::println);
 
         Stream<Integer> stream5 = Stream.of(1, 2, 3, 4, 5, 1, 2, 3);
-        stream5.distinct().forEach(System.out::println);
+//        stream5.distinct().forEach(System.out::println);
 
 //        System.out.println(stream5.count());
-        System.out.println(stream5.distinct().count());
+//        System.out.println(stream5.distinct().count());
+        System.out.println(stream5.distinct().peek(System.out::println).count());
 
     }
 }
