@@ -23,5 +23,7 @@ public class Test9 {
 
         Optional<Student> max = students.stream().max((x,y)->x.getAge()-y.getAge());
         System.out.println(max);
+
+        students.stream().filter(e->e.getAge()>20).limit(2).forEach(System.out::println);
     }
 }
